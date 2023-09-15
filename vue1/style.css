@@ -1,0 +1,23 @@
+.circel{
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    border-radius: 50%;
+}
+.circel {
+    text-align: center;
+    
+}
+.circel h1{
+    padding: 50px;
+}
+.purple{
+    background-color: #767DEA;
+}
+
+.text-black{
+    color: rgb(47, 180, 180);
+}
+.text-orange{
+    color: yellow;
+}
