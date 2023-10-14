@@ -1,0 +1,12 @@
+{
+    "home": {
+        "listen" :"Listen to Great Music!"
+    },
+    "song": {
+        "comment_count" :"NO Comments | 1 comment | {count} comments"
+    },
+    "manage":{
+        "my_songs":"My Song"
+    }
+   
+}

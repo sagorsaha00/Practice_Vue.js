@@ -1,0 +1,348 @@
+<template>
+
+       Auth Modal
+   <div class="fixed z-10 inset-0 overflow-y-auto" id="modal " :class="hiddenClass">
+    <div
+      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+    >
+      <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-gray-800 opacity-75"></div>
+      </div>
+
+      <!-- This element is to trick the browser into centering the modal contents. -->
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen"
+        > &#8203;</span
+      >
+
+      <div
+        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+      >
+        <!-- Add margin if you want to see some of the overlay behind the modal-->
+        <div class="py-4 text-left px-6">
+          <!--Title-->
+          <div class="flex justify-between items-center pb-4">
+            <p class="text-2xl font-bold">Your Account</p>
+            <!-- Modal Close Button -->
+            <div class="modal-close cursor-pointer z-50"
+            @click="modalVisibility = false">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <ul class="flex flex-wrap mb-4">
+            <li class="flex-auto text-center">
+              <a
+                class="block rounded py-3 px-4 transition hover:text-white text-white bg-blue-600"
+                href="#"
+                @click.prevent="tab = 'login'"
+                :class="{'hover:text-white text-white bg-blue-600' : tab === 'login',
+                 'hover:text-blue-600': tab === 'register' }"
+                >Login</a
+              >
+            </li>
+            <li class="flex-auto text-center">
+              <a class="block rounded py-3 px-4 transition" href="#"
+              @click.prevent="tab = 'register'"
+                :class="{'hover:text-white text-white bg-blue-600' : tab === 'register',
+                 'hover:text-blue-600': tab === 'login' } "
+                >Register</a
+              >
+            </li>
+          </ul>
+
+          <!-- Login Form -->
+          <form v-show="tab === 'login'">
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Email</label>
+              <input
+                type="email"
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                placeholder="Enter Email"
+              />
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Password</label>
+              <input
+                type="password"
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                placeholder="Password"
+              />
+            </div>
+            <button
+              type="submit"
+              class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+            >
+              Submit
+            </button>
+          </form>
+          <!-- Registration Form -->
+          <vee-form v-show= "tab === 'register'" :validation-schema="schema" @submit="register" >
+            <!-- Name -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Name</label>
+
+              <vee-field type="text" name="name" 
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                placeholder="Enter Name" 
+               
+              />
+              <ErrorMessage class="text-red-600" name="name"/>
+
+            </div>
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Email</label>
+              <input
+                type="email"
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                placeholder="Enter Email"
+              />
+            </div>
+            <!-- Age -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Age</label>
+              <input
+                type="number"
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+              />
+            </div>
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Password</label>
+              <input
+                type="password"
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                placeholder="Password"
+              />
+            </div>
+            <!-- Confirm Password -->
+            <div class="mb-3" >
+              <label class="inline-block mb-2">Confirm Password</label>
+              <input
+                type="password"
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                placeholder="Confirm Password"
+              />
+            </div>
+            <!-- Country -->
+            <div class="mb-3">
+              <label class="inline-block mb-2">Country</label>
+              <select
+                class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+              >
+                <option value="USA">USA</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Germany">Germany</option>
+              </select>
+            </div>
+            <!-- TOS -->
+            <div class="mb-3 pl-6">
+              <input
+                type="checkbox"
+                class="w-4 h-4 float-left -ml-6 mt-1 rounded"
+              />
+              <label class="inline-block">Accept terms of service</label>
+            </div>
+            <button
+              type="submit"
+              class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+            >
+              Submit
+            </button>
+          </vee-form>
+        </div>
+      </div>
+    </div>
+  </div>    
+    
+</template>
+
+<script>
+
+
+import { mapState ,mapWritableState } from "pinia";
+import useModalStore from "../stores/modal"
+
+
+ 
+
+export default{
+    name:"Auth",
+    data() {
+        return {
+            tab: "login",
+            schema : {
+            names:"required",
+            email:"",
+            age:"",
+            password:"",
+            confirm_password :"",
+            country:"",
+            tos:"",
+          }
+        };
+    },
+    computed:{
+      ...mapState(useModalStore,["hiddenClass"]),
+      ...mapWritableState(useModalStore,{
+        modalVisibility :"isOpen",
+      }),
+      
+    }
+}
+</script>
+
+
+
+
+
+
+,,,
+
+
+
+<template>
+
+  <div class="bg-white rounded border border-gray-200 relative flex flex-col">
+              <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
+                <span class="card-title">Upload</span>
+                <i class="fas fa-upload float-right text-green-400 text-2xl"></i>
+              </div>
+              <div class="p-6">
+                <!-- Upload Dropbox -->
+                <div
+                  class="w-full px-10 py-20 rounded text-center cursor-pointer border border-dashed border-gray-400 text-gray-400 transition duration-500 hover:text-white hover:bg-green-400 hover:border-green-400 hover:border-solid"
+                  :class="{'bg-green-400 border-green-400 border-solid' : is_dragover }"
+                  @drag.prevent.stop=""
+                  @dragstart.prevent.stop=""
+                  @dragend.prevent.stop ="is_dragover = false"
+                  @dragover.prevent.stop="is_dragover = true"
+                  @dragenter.prevent.stop="is_dragover = true"
+                  @dragleave.prevent.stop="is_dragover = false"
+                  @drop.prevent.stop="upload($event)"
+                >
+                  <h5>Drop your files here</h5>
+                </div>
+                <input type="file" multiple @change="upload($event)" >
+                <hr class="my-6" />
+                <!-- Progess Bars -->
+                <div class="mb-4" v-for="upload in uploads" :key="upload.name">
+                  <!-- File Name -->
+                  <div class="font-bold text-sm" :class="upload.text_class" >
+                    <i :class="upload.icon"></i>{{ upload.name }}</div>
+                  <div class="flex h-4 overflow-hidden bg-gray-200 rounded">
+                    <!-- Inner Progress Bar -->
+                    <div
+                      class="transition-all progress-bar bg-blue-400"
+                      :class="upload.variant"
+                      :style="{width:upload.current_progress + '%'}"
+                    ></div>
+                  </div>
+                </div>
+             
+              </div>
+            </div>
+      
+
+
+
+
+
+
+
+
+
+            ////
+            <!-- <script>
+import {
+    songsCollection,
+    auth,
+    commentsCollection
+} from '../includes/firebase'
+import { mapState,mapActions } from 'pinia';
+import useUserStore from '../stores/user'
+import usePlayerStore from "../stores/player"
+export default {
+    name: 'Song',
+    data() {
+        return {
+            song: {},
+            schema: {
+            comment: 'required|min:3'
+            },
+            comment_in_submission: false,
+            comment_show_alert: false,
+            comment_alert_variant:'bg-blue-500',
+            comment_alert_message:'please wait! your comment is being submitted',
+            comments:[],
+        }
+    },
+    async created() {
+
+          this.getComments();
+    },
+    computed:{
+      ...mapState(useUserStore,["userLoggedIn"])
+    },
+    // async created() {
+    //     const docSnapshot = await songsCollection.doc(this.$route.params.id).get();
+
+    //     if(!docSnapshot.exists) {
+    //         this.$router.push({ name:'home'});
+    //         return;
+    //     }
+
+    //     this.song = docSnapshot.data();
+ 
+      
+ 
+    // },
+    methods: {
+    // ...mapActions(['newSong']),
+    ...mapActions(usePlayerStore,["newSong"]),
+    async addComment(values, { resetForm }) {
+      this.comment_in_submission = true;
+      this.comment_show_alert = true;
+      this.comment_alert_variant = 'bg-blue-500';
+      this.comment_alert_message = 'Please wait! Your comment is being submitted';
+
+      const comment = {
+        content: values.comment,
+        datePosted: new Date().toString(),
+        sid: this.$route.params.id,
+        name: auth.currentUser.displayName,
+        uid: auth.currentUser.uid,
+      };
+  
+
+      await commentsCollection.add(comment);
+
+      this.getComments();
+
+      this.comment_in_submission = false;
+      this.comment_alert_variant = 'bg-green-500';
+      this.comment_alert_message = 'Comment added!';
+
+      resetForm();
+    },
+    async getComments() {
+      const snapshots = await commentsCollection.where(
+        'sid', '==', this.$route.params.id,
+      ).get();
+
+      this.comments = [];
+
+      snapshots.forEach((doc) => [
+        this.comments.push({
+          docID: doc.id,
+          ...doc.data(),
+        }),
+      ]);
+    },
+  },
+
+}
+</script> -->

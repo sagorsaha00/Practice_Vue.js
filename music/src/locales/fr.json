@@ -1,0 +1,10 @@
+{
+    "home":{
+        "listen" :"Écoutez de la bonne musique !"
+    },
+    "manage" :{
+        "my_songs" : "Mes chansons"
+
+    }
+   
+}
