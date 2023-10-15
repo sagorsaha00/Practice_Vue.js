@@ -4,27 +4,28 @@
                 type="email"
                 class="form-control"
                 placeholder="E-mail"
-                :value="modalValue"
+                :value="modelValue"
                 @input="update($event)"
                 :class="{
-                  'is-valid':
-                  modalValue.length >= 4 && modalValue.length > 0,
-                  'is-invalid':
-                  modalValue.length < 4 && modalValue.length > 0,
+                  'is-valid':validemail(modelValue),
+                  
+                  'is-invalid': !validemail(modelValue),
+                   
                 }"
               />
     </template>
 
     <script>
 // import { toValue } from 'vue';
-
+import validemail from '../valid-email'
 export default {
-    name:'Emailinput',
-   props:['modalValue'],
+    name:'EmailInput',
+   props:['modelValue'],
    methods:{
     update($event) {
-        this.$emit('update:modalValue', $event.target.value)
-    }
+        this.$emit('update:modelValue', $event.target.value)
+    },
+    validemail
    }
 }
 

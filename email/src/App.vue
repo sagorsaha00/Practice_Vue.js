@@ -14,9 +14,9 @@
                  @input="newsletterName = $event.target.value"
               />
             </div>
-            <div class="mb-2">
+            <div class="form-group">
               <!-- <emailinput v-model="newsletterName" /> -->
-              <emailinput v-model="newsletterName" />
+              <emailinput v-model="newsletterEmail" />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
