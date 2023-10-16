@@ -8,7 +8,6 @@
                 @input="update($event)"
                 :class="{
                   'is-valid':validemail(modelValue),
-                  
                   'is-invalid': !validemail(modelValue),
                    
                 }"
