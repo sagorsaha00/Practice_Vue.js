@@ -1,5 +1,5 @@
  <template>
-  -->
+ 
 <p>hey</p>
  <hello :age="age"/>
  <user :age="age" @age-change="updateAge"/>

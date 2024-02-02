@@ -4,7 +4,7 @@
  
  
 
-  <router-view > 
+  <router-view> 
   <!-- <transition name="fade" mode="out-in">
          <component :is="Component"> </component>
   </transition> -->
