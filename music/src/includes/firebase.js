@@ -18,10 +18,13 @@ const auth = firebase.auth();
 const db = firebase.firestore();
 const storage = firebase.storage();
 
+<<<<<<< HEAD
 db.enablePersistence().catch((error) => {
   console.log(`firebase persistence error ${error.code}`);
 })
 
+=======
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
 
 const songsCollection = db.collection('songs');
 const userCollection = db.collection("users")

@@ -1,12 +1,17 @@
 import { defineStore } from "pinia"
+<<<<<<< HEAD
 import { Howl } from "howler"
 import helper from "../includes/helper";
+=======
+import {Howl} from "howler"
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
  
 
 export default defineStore("player", {
     state:() => ({
         current_song:{},
         sound:{},
+<<<<<<< HEAD
         seek:"00:00",
         duration:"00:00",
         playerProgress:"0%"
@@ -16,6 +21,11 @@ export default defineStore("player", {
             if(this.sound instanceof Howl) {
                 this.sound.unload();
             }
+=======
+    }),
+    actions:{
+        async newSong(song) {
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
             this.current_song = song;
 
             this.sound = new Howl({
@@ -24,6 +34,7 @@ export default defineStore("player", {
             })
 
             this.sound.play();
+<<<<<<< HEAD
 
 
             this.sound.on("play", () => {
@@ -104,4 +115,8 @@ export default defineStore("player", {
     //         return false;
     //     }
     // }
+=======
+        }
+    }
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
 })

@@ -12,6 +12,15 @@ const Manage = () => import('../views/Manage.Vue')
 const Song = () => import('../views/Song.vue');
  
 
+<<<<<<< HEAD
+=======
+import Home from "../views/Home.vue"
+import About from "../views/About.vue"
+import Manage from '../views/Manage.Vue'
+import Song from '../views/Song.vue'
+import useUseerStore from "../stores/user"
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
+
 
 const routes = [
   {
@@ -25,12 +34,20 @@ const routes = [
     component: About
   },
   {
+<<<<<<< HEAD
     name: 'song',
+=======
+    name:'song',
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
     path: '/song/:id',
     component: Song
   },
   {
+<<<<<<< HEAD
     name: 'manage',
+=======
+    name:'manage',
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
     // alias:'./manage',
     path: '/manage-music',
     component: Manage,
@@ -47,6 +64,7 @@ const routes = [
     path: '/manage',
     redirect: { name: 'manage' }
   },
+  
 
   {
     path: '/:catchAll(.*)*',

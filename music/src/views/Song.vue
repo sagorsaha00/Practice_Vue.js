@@ -1,5 +1,8 @@
 <template>
+<<<<<<< HEAD
     <main>
+=======
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
 <!-- Music Header -->
 <section class="w-full mb-8 py-14 text-center text-white relative">
     <div class="absolute inset-0 w-full h-full box-border bg-contain music-bg" style="background-image: url(/assets/img/song-header.png)"></div>
@@ -14,22 +17,37 @@
             <!-- Song Info -->
             <div class="text-3xl font-bold">{{ song?.modified_name }}</div>
             <div> {{ song?.genre }}</div>
+<<<<<<< HEAD
             <div class="song-price"> {{ $n(1, "currency", "USD") }}</div>
+=======
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
             
         </div>
     </div>
 </section>
 <!-- Form -->
+<<<<<<< HEAD
 <section class="container mx-auto mt-6" id="comments">
     <div class="bg-white rounded border border-gray-200 relative flex flex-col">
         <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
             <!-- Comment Count -->
             <span class="card-title"> {{ $tc("song.comment_count", song.comment_count, {count:song.comment_count}) }} </span>
+=======
+<section class="container mx-auto mt-6">
+    <div class="bg-white rounded border border-gray-200 relative flex flex-col">
+        <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
+            <!-- Comment Count -->
+            <span class="card-title">Comments {{ song.comment_count }}</span>
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
             <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
         </div>
         <div class="p-6">
             <div class="text-white text-center font-bold p-4 mb-4" v-if="comment_show_alert" :class="comment_alert_varinat">
+<<<<<<< HEAD
             {{ comment_alert_message }} </div>
+=======
+            {{ comment_alert_message }}</div>
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
             <vee-form :validation-schema="schema" @submit="addComment" v-if="userLoggedIn">
                 <vee-field as="textarea" name="comment" class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded mb-4" placeholder="Your comment here..."></vee-field>
                 <ErrorMessage class="text-red-600" name="comment" />
@@ -61,7 +79,10 @@
     </li>
  
 </ul>
+<<<<<<< HEAD
 </main>
+=======
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
 </template>
 
 <script>
@@ -102,6 +123,7 @@ export default {
         }); 
     }
     },
+<<<<<<< HEAD
     async beforeRouteEnter(to, from ,next) {
 
         const docSnapshot = await songsCollection.doc(to.params.id).get();
@@ -110,11 +132,20 @@ export default {
              
         if (!docSnapshot.exists) {
             vm.$router.push({
+=======
+    async created() {
+
+        const docSnapshot = await songsCollection.doc(this.$route.params.id).get();
+
+        if (!docSnapshot.exists) {
+            this.$router.push({
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
                 name: 'home'
             })
             return;
         }
 
+<<<<<<< HEAD
         const { sort } = vm.$route.query; 
         //
         vm.sort = sort === '1' || sort === '2' ? sort : '1';
@@ -124,6 +155,13 @@ export default {
         });
 
 
+=======
+        const { sort } = this.$route.query; 
+        this.sort = sort === '1' || sort === '2' ? sort : '1';
+
+        this.song = docSnapshot.data();
+         this.getComments();
+>>>>>>> 92e997fb40dae32ff317c1a3602b72a16df9dd44
     },
     methods:{
         ...mapActions(useplayerStore,["newSong"]),
